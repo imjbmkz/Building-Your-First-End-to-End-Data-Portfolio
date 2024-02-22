@@ -106,3 +106,11 @@ set FTPPASS="password" # replace with your FTP password
 ## Running the app
 1. Activate the virtual environment by running `.\env\Scripts\Activate.ps1` on PowerShell or `.\env\Scripts\activate.bat` on Command Prompt.
 2. Run `python app.py`
+
+## Take-home activity
+1. Create your version of the pipeline that uses the dataset from [OFAC Consolidated Sanctions List (Non-SDN Lists)](https://ofac.treasury.gov/consolidated-sanctions-list-non-sdn-lists).
+2. You may use whichever data format you like. 
+3. Download the file, then upload to your local FTP server. 
+4. To make you submission, do the following:
+   - Post the link to your repository on [Data Engineering Pilipinas](https://www.facebook.com/groups/1225639754738756) Facebook page. Don't be shy to tag me, [Josh Dev](https://www.facebook.com/profile.php?id=100087019650476), and [Data Engineering Pilipinas](https://www.facebook.com/DataEngineeringPilipinas).
+   - Post the link to your repository on your LinkedIn page. Feel free to [connect](https://www.linkedin.com/in/josh-valdeleon-2a8984150/) and tag me on the post.
