@@ -102,3 +102,7 @@ set FTPPASS="password" # replace with your FTP password
 5. Activate the virtual environment by running `.\env\Scripts\Activate.ps1` on PowerShell or `.\env\Scripts\activate.bat` on Command Prompt.
 6. Install the project dependencies by running `pip install -r requirements.txt`.
 7. Deactivate the virtual environment by running the command `deactivate`.
+
+## Running the app
+1. Activate the virtual environment by running `.\env\Scripts\Activate.ps1` on PowerShell or `.\env\Scripts\activate.bat` on Command Prompt.
+2. Run `python app.py`

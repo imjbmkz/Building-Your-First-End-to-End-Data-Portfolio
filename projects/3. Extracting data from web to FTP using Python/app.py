@@ -1,4 +1,6 @@
 import json
+import time
+import schedule
 import pandas as pd
 from os import environ, remove
 from pathlib import Path
@@ -28,8 +30,7 @@ def read_csv(config: dict) -> pd.DataFrame:
     params = config["PARAMS"]
     return pd.read_csv(url, **params)
 
-if __name__=="__main__":
-
+def pipeline():
     # Load source configuration
     with open("config.json", "rb") as fp:
         config = json.load(fp)
@@ -49,4 +50,12 @@ if __name__=="__main__":
         # Delete file
         remove(file_name)
 
-        print("Files have been uploaded to FTP.")
+        print(f"{file_name} has been uploaded to FTP.")
+
+if __name__=="__main__":
+
+    schedule.every().day.at("22:23").do(pipeline)
+
+    while True:
+        schedule.run_pending()
+        time.sleep(1)
