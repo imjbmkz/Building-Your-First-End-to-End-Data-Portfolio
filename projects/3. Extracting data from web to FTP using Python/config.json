@@ -1,0 +1,55 @@
+{
+    "OFAC_SDN": {
+        "URL": "https://www.treasury.gov/ofac/downloads/sdn.csv",
+        "PARAMS": {
+            "names": [
+                "ent_num",
+                "sdn_Name",
+                "sdn_Type",
+                "program",
+                "title",
+                "call_sign",
+                "vess_type",
+                "tonnage",
+                "grt",
+                "vess_flag",
+                "vess_owner",
+                "remarks"
+            ],
+            "na_values": "-0- ",
+            "skipfooter": 1,
+            "engine": "python"
+        }
+    },
+    "OFAC_ALT": {
+        "URL": "https://www.treasury.gov/ofac/downloads/alt.csv",
+        "PARAMS": {
+            "names": [
+                "ent_num",
+                "alt_num",
+                "alt_type",
+                "alt_name",
+                "alt_remarks"
+            ],
+            "na_values": "-0- ",
+            "skipfooter": 1,
+            "engine": "python"
+        }
+    },
+    "OFAC_ADD": {
+        "URL": "https://www.treasury.gov/ofac/downloads/add.csv",
+        "PARAMS": {
+            "names": [
+                "ent_num",
+                "add_num",
+                "address",
+                "complete_address",
+                "country",
+                "add_remarks"
+            ],
+            "na_values": "-0- ",
+            "skipfooter": 1,
+            "engine": "python"
+        }
+    }
+}
