@@ -1,3 +1,4 @@
+import sys
 import json
 import time
 import schedule
@@ -54,8 +55,12 @@ def pipeline():
 
 if __name__=="__main__":
 
-    schedule.every().day.at("22:23").do(pipeline)
+    if sys.argv[1]=="manual":
+        pipeline()
 
-    while True:
-        schedule.run_pending()
-        time.sleep(1)
+    elif sys.argv[1]=="schedule":
+        schedule.every().day.at("22:23").do(pipeline)
+
+        while True:
+            schedule.run_pending()
+            time.sleep(1)

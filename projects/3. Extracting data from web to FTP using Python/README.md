@@ -22,7 +22,7 @@ Install WSL in Windows. See guide [here](https://learn.microsoft.com/en-us/windo
 
 **Update `vsftpd` configuration**
 1. Create a copy of the `vsftpd.conf` file by running `sudo cp /etc/vsftpd.conf /etc/vsftpd.conf_original`. 
-2. Open the `vsftpd.conf` in a text editor (`nano`) to edit some settings. To do so, run `sudo nano etc/vsftpd.conf`. 
+2. Open the `vsftpd.conf` in a text editor (`nano`) to edit some settings. To do so, run `sudo nano /etc/vsftpd.conf`. 
 3. Ensure that the following parameters has their corresponding values. Leave everything as default.
 ```
 local_enable=YES
@@ -34,7 +34,7 @@ ssl_enable=YES
 require_ssl_reuse=NO # add to the bottom of the file
 ```
 4. To save the changes, press `CTRL` + `S` or `CTRL` + `O`. To close the file, press `CTRL` + `X`.
-5. Create the `vsftpd.chroot_list` file which will contain the list of users to chroot. Run `sudo nano /etc/vsftpd.chroot_list` to create a blank file called `vsftpd.chroot_list`. On the first line, simply add your WSL username (or the user that you will use for FTP).  
+5. Create the `vsftpd.chroot_list` file which will contain the list of users to chroot. Run `sudo touch /etc/vsftpd.chroot_list` to create a blank file called `vsftpd.chroot_list`. On the first line, simply add your WSL username (or the user that you will use for FTP).  
 6. Restart the `vsftpd` service by running `sudo systemctl restart vsftpd`. Check the status by running `sudo systemctl status vsftpd` to ensure that the service is running.
 7. Take WSL ip address by running `ip address`.
 
@@ -111,6 +111,6 @@ set FTPPASS="password" # replace with your FTP password
 1. Create your version of the pipeline that uses the dataset from [OFAC Consolidated Sanctions List (Non-SDN Lists)](https://ofac.treasury.gov/consolidated-sanctions-list-non-sdn-lists).
 2. You may use whichever data format you like. 
 3. Download the file, then upload to your local FTP server. 
-4. To make you submission, do the following:
+4. To make your submission, do the following:
    - Post the link to your repository on [Data Engineering Pilipinas](https://www.facebook.com/groups/1225639754738756) Facebook page. Don't be shy to tag me, [Josh Dev](https://www.facebook.com/profile.php?id=100087019650476), and [Data Engineering Pilipinas](https://www.facebook.com/DataEngineeringPilipinas).
    - Post the link to your repository on your LinkedIn page. Feel free to [connect](https://www.linkedin.com/in/josh-valdeleon-2a8984150/) and tag me on the post.
