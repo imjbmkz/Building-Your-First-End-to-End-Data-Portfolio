@@ -41,9 +41,8 @@ require_ssl_reuse=NO # add to the bottom of the file
 **Create FTP user**
 1. Create a Linux user by running `sudo adduser ftpuser`. You may use a different username by replacing `ftpuser` with your preferred username. Enter the password for the new user. Optionally, you can add the user details on the prompt. Press enter to skip.
 2. Create a directory that we will use for the exercise. `sudo mkdir /home/ftpuser/ftp`. 
-3. Change the ownership of the new folder. `sudo chown nobody:nogroup /home/ftpuser/ftp`.
-4. Remove the root access from the new user. `sudo chmod a-w /home/ftpuser/ftp`.
-5. Add the new user to the `vsftpd.chroot_list` file. `echo "ftpuser" | sudo tee -a /etc/vsftpd.chroot_list`.
+3. Change the ownership of the new folder. `sudo chown ftpuser /home/ftpuser/ftp`.
+4. Add the new user to the `vsftpd.chroot_list` file. `echo "ftpuser" | sudo tee -a /etc/vsftpd.chroot_list`.
 
 **Testing FTP connection in Python**
 Here's a simple Python script that tests connection to the FTP server.

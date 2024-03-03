@@ -1,0 +1,2103 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="2/26/2024 9:37:54 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="LAPTOP-0UNAVFCC"
+  DTS:CreatorName="LAPTOP-0UNAVFCC\Josh"
+  DTS:DTSID="{CA73719C-3155-4CAE-AD19-CF1ADA497B56}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5397.1"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="FtpToPostgre"
+  DTS:PackageType="5"
+  DTS:VersionBuild="73"
+  DTS:VersionGUID="{E6E90A56-F28D-4234-A250-C217A474AAED}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{16FF4E1E-8A55-436B-BC70-EDA11CDB4521}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;Compress-Archive -Path Extracts\\*csv &quot;+ &quot; -DestinationPath &quot;+ @[User::ZippedFile] +&quot; -Force&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="PSCompressFileCommand">
+      <DTS:VariableValue
+        DTS:DataType="8">Compress-Archive -Path Extracts\*csv  -DestinationPath Extracts\ofac_sdn_extracts_20240302.zip -Force</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{81C258F4-1837-4981-8225-E43D88A161DC}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="RemoteLoadedPath">
+      <DTS:VariableValue
+        DTS:DataType="8">/home/ftpuser/ftp/loaded</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{298A9D62-4255-4B44-8440-00E89C0F20B8}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="RemotePath">
+      <DTS:VariableValue
+        DTS:DataType="8">/home/ftpuser/ftp/new/OFAC*</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{4B768F3F-E81E-4EAA-909C-80AA3BAD9EF1}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[User::WorkingDirectory]+&quot;\\Extracts&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="TempDirectory">
+      <DTS:VariableValue
+        DTS:DataType="8">C:\Users\Josh\OneDrive\Community Stuff\Josh Dev\Live Sessions\08_Build your data portfolio\Finished Project Repository\projects\4. Loading CSV files from FTP to PostgreSQL using SSIS\Extracts</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{F5492C41-81C4-46DE-9487-BA8EBD11F186}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="WorkingDirectory">
+      <DTS:VariableValue
+        DTS:DataType="8">C:\Users\Josh\OneDrive\Community Stuff\Josh Dev\Live Sessions\08_Build your data portfolio\Finished Project Repository\projects\4. Loading CSV files from FTP to PostgreSQL using SSIS</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{7D7DD49D-12F1-47EE-9677-CC195D8D9721}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;Extracts\\ofac_sdn_extracts_&quot;+ (DT_STR,4,1252)DATEPART( &quot;yyyy&quot; , getdate() ) + &#xA;RIGHT(&quot;0&quot; + (DT_STR,4,1252)DATEPART( &quot;mm&quot; , getdate() ), 2) + &#xA;RIGHT(&quot;0&quot; + (DT_STR,4,1252)DATEPART( &quot;dd&quot; , getdate() ), 2) +&quot;.zip&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ZippedFile">
+      <DTS:VariableValue
+        DTS:DataType="8">Extracts\ofac_sdn_extracts_20240302.zip</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{901F4081-B2F8-4ABD-AE74-9A707EA53AF7}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[User::WorkingDirectory]  +&quot;\\&quot; +@[User::ZippedFile]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ZippedFilePath">
+      <DTS:VariableValue
+        DTS:DataType="8">C:\Users\Josh\OneDrive\Community Stuff\Josh Dev\Live Sessions\08_Build your data portfolio\Finished Project Repository\projects\4. Loading CSV files from FTP to PostgreSQL using SSIS\Extracts\ofac_sdn_extracts_20240302.zip</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Compress CSV files"
+      DTS:CreationName="Microsoft.ExecuteProcess"
+      DTS:Description="Execute Process Task"
+      DTS:DTSID="{97DCD753-525F-482D-8B15-FE558883423E}"
+      DTS:ExecutableType="Microsoft.ExecuteProcess"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Compress CSV files"
+      DTS:TaskContact="Execute Process Task;Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:PropertyExpression
+        DTS:Name="Arguments">@[User::PSCompressFileCommand]</DTS:PropertyExpression>
+      <DTS:PropertyExpression
+        DTS:Name="WorkingDirectory">@[User::WorkingDirectory]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <ExecuteProcessData
+          Executable="C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe"
+          Arguments="Compress-Archive -Path Extracts\*csv  -DestinationPath Extracts\ofac_sdn_extracts_20240302.zip -Force"
+          WorkingDirectory="C:\Users\Josh\OneDrive\Community Stuff\Josh Dev\Live Sessions\08_Build your data portfolio\Finished Project Repository\projects\4. Loading CSV files from FTP to PostgreSQL using SSIS" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Delete temp files"
+      DTS:CreationName="Microsoft.FileSystemTask"
+      DTS:Description="File System Task"
+      DTS:DTSID="{1F40C0C5-37EB-41FC-9190-38DA2E42EC29}"
+      DTS:ExecutableType="Microsoft.FileSystemTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Delete temp files"
+      DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <FileSystemData
+          TaskOperationType="DeleteDirectoryContent"
+          TaskSourcePath="User::TempDirectory"
+          TaskIsSourceVariable="True" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Download files from FTP"
+      DTS:CreationName="Microsoft.FtpTask"
+      DTS:Description="FTP Task"
+      DTS:DTSID="{8ED0B1FD-6E27-4CCE-8EA6-1EAD9F51A785}"
+      DTS:ExecutableType="Microsoft.FtpTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Download files from FTP"
+      DTS:TaskContact="FTP Task; Microsoft Corporation; SQL Server 2022; (c) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <FtpData
+          ConnectionName="{38C6D7A9-1C08-475F-8599-4E297656835E}"
+          TaskOperationType="Receive"
+          TaskIsLocalPathVar="True"
+          TaskLocalPath="User::TempDirectory"
+          TaskIsRemotePathVar="True"
+          TaskRemotePath="User::RemotePath"
+          TaskOverwriteDest="True" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Parallel DFT"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{92425B7C-8CD0-4D7D-A1A2-1A8A73DEF60C}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Parallel DFT">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Parallel DFT\Load OFAC_ADD CSV to pg"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{3fd3fb7b-e309-4706-98d5-386cf956458f}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Load OFAC_ADD CSV to pg"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Parallel DFT\Load OFAC_ADD CSV to pg\CSV OFAC ADD"
+                  componentClassID="Microsoft.FlatFileSource"
+                  contactInfo="Flat File Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+                  description="Flat File Source"
+                  localeId="1033"
+                  name="CSV OFAC ADD"
+                  usesDispositions="true"
+                  version="1">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      description="Specifies whether zero-length columns are treated as null."
+                      name="RetainNulls">true</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of an output column containing the file name. If no name is specified, no output column containing the file name will be generated."
+                      name="FileNameColumnName"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Parallel DFT\Load OFAC_ADD CSV to pg\CSV OFAC ADD.Connections[FlatFileConnection]"
+                      connectionManagerID="{A8B04C64-89C5-418D-AA91-89360059D7E2}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[CsvOfacAdd]"
+                      name="FlatFileConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Parallel DFT\Load OFAC_ADD CSV to pg\CSV OFAC ADD.Outputs[Flat File Source Output]"
+                      name="Flat File Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Parallel DFT\Load OFAC_ADD CSV to pg\CSV OFAC ADD.Outputs[Flat File Source Output].Columns[ent_num]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Parallel DFT\Load OFAC_ADD CSV to pg\CSV OFAC ADD.Outputs[Flat File Source Output].ExternalColumns[ent_num]"
+                          lineageId="Package\Parallel DFT\Load OFAC_ADD CSV to pg\CSV OFAC ADD.Outputs[Flat File Source Output].Columns[ent_num]"
+                          name="ent_num"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Parallel DFT\Load OFAC_ADD CSV to pg\CSV OFAC ADD.Outputs[Flat File Source Output].Columns[add_num]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Parallel DFT\Load OFAC_ADD CSV to pg\CSV OFAC ADD.Outputs[Flat File Source Output].ExternalColumns[add_num]"
+                          lineageId="Package\Parallel DFT\Load OFAC_ADD CSV to pg\CSV OFAC ADD.Outputs[Flat File Source Output].Columns[add_num]"
+                          name="add_num"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Parallel DFT\Load OFAC_ADD CSV to pg\CSV OFAC ADD.Outputs[Flat File Source Output].Columns[address]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Parallel DFT\Load OFAC_ADD CSV to pg\CSV OFAC ADD.Outputs[Flat File Source Output].ExternalColumns[address]"
+                          length="255"
+                          lineageId="Package\Parallel DFT\Load OFAC_ADD CSV to pg\CSV OFAC ADD.Outputs[Flat File Source Output].Columns[address]"
+                          name="address"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Parallel DFT\Load OFAC_ADD CSV to pg\CSV OFAC ADD.Outputs[Flat File Source Output].Columns[complete_address]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Parallel DFT\Load OFAC_ADD CSV to pg\CSV OFAC ADD.Outputs[Flat File Source Output].ExternalColumns[complete_address]"
+                          length="100"
+                          lineageId="Package\Parallel DFT\Load OFAC_ADD CSV to pg\CSV OFAC ADD.Outputs[Flat File Source Output].Columns[complete_address]"
+                          name="complete_address"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Parallel DFT\Load OFAC_ADD CSV to pg\CSV OFAC ADD.Outputs[Flat File Source Output].Columns[country]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Parallel DFT\Load OFAC_ADD CSV to pg\CSV OFAC ADD.Outputs[Flat File Source Output].ExternalColumns[country]"
+                          length="50"
+                          lineageId="Package\Parallel DFT\Load OFAC_ADD CSV to pg\CSV OFAC ADD.Outputs[Flat File Source Output].Columns[country]"
+                          name="country"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Parallel DFT\Load OFAC_ADD CSV to pg\CSV OFAC ADD.Outputs[Flat File Source Output].Columns[add_remarks]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Parallel DFT\Load OFAC_ADD CSV to pg\CSV OFAC ADD.Outputs[Flat File Source Output].ExternalColumns[add_remarks]"
+                          length="255"
+                          lineageId="Package\Parallel DFT\Load OFAC_ADD CSV to pg\CSV OFAC ADD.Outputs[Flat File Source Output].Columns[add_remarks]"
+                          name="add_remarks"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Parallel DFT\Load OFAC_ADD CSV to pg\CSV OFAC ADD.Outputs[Flat File Source Output].ExternalColumns[ent_num]"
+                          dataType="i2"
+                          name="ent_num" />
+                        <externalMetadataColumn
+                          refId="Package\Parallel DFT\Load OFAC_ADD CSV to pg\CSV OFAC ADD.Outputs[Flat File Source Output].ExternalColumns[add_num]"
+                          dataType="i4"
+                          name="add_num" />
+                        <externalMetadataColumn
+                          refId="Package\Parallel DFT\Load OFAC_ADD CSV to pg\CSV OFAC ADD.Outputs[Flat File Source Output].ExternalColumns[address]"
+                          codePage="1252"
+                          dataType="str"
+                          length="255"
+                          name="address" />
+                        <externalMetadataColumn
+                          refId="Package\Parallel DFT\Load OFAC_ADD CSV to pg\CSV OFAC ADD.Outputs[Flat File Source Output].ExternalColumns[complete_address]"
+                          codePage="1252"
+                          dataType="str"
+                          length="100"
+                          name="complete_address" />
+                        <externalMetadataColumn
+                          refId="Package\Parallel DFT\Load OFAC_ADD CSV to pg\CSV OFAC ADD.Outputs[Flat File Source Output].ExternalColumns[country]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="country" />
+                        <externalMetadataColumn
+                          refId="Package\Parallel DFT\Load OFAC_ADD CSV to pg\CSV OFAC ADD.Outputs[Flat File Source Output].ExternalColumns[add_remarks]"
+                          codePage="1252"
+                          dataType="str"
+                          length="255"
+                          name="add_remarks" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Parallel DFT\Load OFAC_ADD CSV to pg\CSV OFAC ADD.Outputs[Flat File Source Error Output]"
+                      isErrorOut="true"
+                      name="Flat File Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Parallel DFT\Load OFAC_ADD CSV to pg\CSV OFAC ADD.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                          codePage="1252"
+                          dataType="text"
+                          description="Flat File Source Error Output Column"
+                          lineageId="Package\Parallel DFT\Load OFAC_ADD CSV to pg\CSV OFAC ADD.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                          name="Flat File Source Error Output Column" />
+                        <outputColumn
+                          refId="Package\Parallel DFT\Load OFAC_ADD CSV to pg\CSV OFAC ADD.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Parallel DFT\Load OFAC_ADD CSV to pg\CSV OFAC ADD.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Parallel DFT\Load OFAC_ADD CSV to pg\CSV OFAC ADD.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Parallel DFT\Load OFAC_ADD CSV to pg\CSV OFAC ADD.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Parallel DFT\Load OFAC_ADD CSV to pg\OFAC ADD"
+                  componentClassID="Microsoft.SSISODBCDst"
+                  contactInfo="ODBC Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+                  description="ODBC Destination"
+                  name="OFAC ADD"
+                  usesDispositions="true"
+                  version="1">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="The name of the table to be fetched."
+                      expressionType="Notify"
+                      name="TableName">"public"."stg_ofac_add"</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specify the number of rows fetched per batch."
+                      expressionType="Notify"
+                      name="BatchSize">1000</property>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of rows inserted under the same transaction."
+                      expressionType="Notify"
+                      name="TransactionSize">1000</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Determines the chunk size allocation for LOB columns"
+                      expressionType="Notify"
+                      name="LobChunkSize">32768</property>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds to wait for an SQL statement to execute before returning to the application."
+                      expressionType="Notify"
+                      name="StatementTimeout">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="The code page to use when code page information is unavailable from the data source."
+                      expressionType="Notify"
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Int32"
+                      description="The method used for inserting data. Possible values are 'Batch' or 'Row by row'."
+                      expressionType="Notify"
+                      name="InsertMethod">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="The ODBC C data type for binding numeric data."
+                      expressionType="Notify"
+                      name="BindNumericAs">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Determines how the component would bind columns of (multi)-byte string types (i.e., SQL_CHAR, SQL_VARCHAR, SQL_LONGVARCHAR). The options are: Unicode (SQL_C_WCHAR) and ANSI (SQL_C_CHAR)."
+                      expressionType="Notify"
+                      name="BindCharColumnsAs">0</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Parallel DFT\Load OFAC_ADD CSV to pg\OFAC ADD.Connections[ODBCConnection]"
+                      connectionManagerID="{EC8BA102-8BEE-4888-8ABF-569C8BCB8A85}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[PgServer]"
+                      description="The ODBC runtime connection used to access the database."
+                      name="ODBCConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Parallel DFT\Load OFAC_ADD CSV to pg\OFAC ADD.Inputs[ODBC Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="ODBC Destination Input"
+                      truncationRowDisposition="FailComponent">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Parallel DFT\Load OFAC_ADD CSV to pg\OFAC ADD.Inputs[ODBC Destination Input].Columns[ent_num]"
+                          cachedDataType="i4"
+                          cachedName="ent_num"
+                          externalMetadataColumnId="Package\Parallel DFT\Load OFAC_ADD CSV to pg\OFAC ADD.Inputs[ODBC Destination Input].ExternalColumns[ent_num]"
+                          lineageId="Package\Parallel DFT\Load OFAC_ADD CSV to pg\CSV OFAC ADD.Outputs[Flat File Source Output].Columns[ent_num]" />
+                        <inputColumn
+                          refId="Package\Parallel DFT\Load OFAC_ADD CSV to pg\OFAC ADD.Inputs[ODBC Destination Input].Columns[add_num]"
+                          cachedDataType="i4"
+                          cachedName="add_num"
+                          externalMetadataColumnId="Package\Parallel DFT\Load OFAC_ADD CSV to pg\OFAC ADD.Inputs[ODBC Destination Input].ExternalColumns[add_num]"
+                          lineageId="Package\Parallel DFT\Load OFAC_ADD CSV to pg\CSV OFAC ADD.Outputs[Flat File Source Output].Columns[add_num]" />
+                        <inputColumn
+                          refId="Package\Parallel DFT\Load OFAC_ADD CSV to pg\OFAC ADD.Inputs[ODBC Destination Input].Columns[address]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="255"
+                          cachedName="address"
+                          externalMetadataColumnId="Package\Parallel DFT\Load OFAC_ADD CSV to pg\OFAC ADD.Inputs[ODBC Destination Input].ExternalColumns[address]"
+                          lineageId="Package\Parallel DFT\Load OFAC_ADD CSV to pg\CSV OFAC ADD.Outputs[Flat File Source Output].Columns[address]" />
+                        <inputColumn
+                          refId="Package\Parallel DFT\Load OFAC_ADD CSV to pg\OFAC ADD.Inputs[ODBC Destination Input].Columns[complete_address]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="100"
+                          cachedName="complete_address"
+                          externalMetadataColumnId="Package\Parallel DFT\Load OFAC_ADD CSV to pg\OFAC ADD.Inputs[ODBC Destination Input].ExternalColumns[complete_address]"
+                          lineageId="Package\Parallel DFT\Load OFAC_ADD CSV to pg\CSV OFAC ADD.Outputs[Flat File Source Output].Columns[complete_address]" />
+                        <inputColumn
+                          refId="Package\Parallel DFT\Load OFAC_ADD CSV to pg\OFAC ADD.Inputs[ODBC Destination Input].Columns[country]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="country"
+                          externalMetadataColumnId="Package\Parallel DFT\Load OFAC_ADD CSV to pg\OFAC ADD.Inputs[ODBC Destination Input].ExternalColumns[country]"
+                          lineageId="Package\Parallel DFT\Load OFAC_ADD CSV to pg\CSV OFAC ADD.Outputs[Flat File Source Output].Columns[country]" />
+                        <inputColumn
+                          refId="Package\Parallel DFT\Load OFAC_ADD CSV to pg\OFAC ADD.Inputs[ODBC Destination Input].Columns[add_remarks]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="255"
+                          cachedName="add_remarks"
+                          externalMetadataColumnId="Package\Parallel DFT\Load OFAC_ADD CSV to pg\OFAC ADD.Inputs[ODBC Destination Input].ExternalColumns[add_remarks]"
+                          lineageId="Package\Parallel DFT\Load OFAC_ADD CSV to pg\CSV OFAC ADD.Outputs[Flat File Source Output].Columns[add_remarks]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Parallel DFT\Load OFAC_ADD CSV to pg\OFAC ADD.Inputs[ODBC Destination Input].ExternalColumns[ent_num]"
+                          dataType="i4"
+                          name="ent_num" />
+                        <externalMetadataColumn
+                          refId="Package\Parallel DFT\Load OFAC_ADD CSV to pg\OFAC ADD.Inputs[ODBC Destination Input].ExternalColumns[add_num]"
+                          dataType="i4"
+                          name="add_num" />
+                        <externalMetadataColumn
+                          refId="Package\Parallel DFT\Load OFAC_ADD CSV to pg\OFAC ADD.Inputs[ODBC Destination Input].ExternalColumns[address]"
+                          dataType="wstr"
+                          length="750"
+                          name="address" />
+                        <externalMetadataColumn
+                          refId="Package\Parallel DFT\Load OFAC_ADD CSV to pg\OFAC ADD.Inputs[ODBC Destination Input].ExternalColumns[complete_address]"
+                          dataType="wstr"
+                          length="116"
+                          name="complete_address" />
+                        <externalMetadataColumn
+                          refId="Package\Parallel DFT\Load OFAC_ADD CSV to pg\OFAC ADD.Inputs[ODBC Destination Input].ExternalColumns[country]"
+                          dataType="wstr"
+                          length="250"
+                          name="country" />
+                        <externalMetadataColumn
+                          refId="Package\Parallel DFT\Load OFAC_ADD CSV to pg\OFAC ADD.Inputs[ODBC Destination Input].ExternalColumns[add_remarks]"
+                          dataType="wstr"
+                          length="200"
+                          name="add_remarks" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Parallel DFT\Load OFAC_ADD CSV to pg\OFAC ADD.Outputs[ODBC Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="ODBC Destination Error Output"
+                      synchronousInputId="Package\Parallel DFT\Load OFAC_ADD CSV to pg\OFAC ADD.Inputs[ODBC Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Parallel DFT\Load OFAC_ADD CSV to pg\OFAC ADD.Outputs[ODBC Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Parallel DFT\Load OFAC_ADD CSV to pg\OFAC ADD.Outputs[ODBC Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Parallel DFT\Load OFAC_ADD CSV to pg\OFAC ADD.Outputs[ODBC Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Parallel DFT\Load OFAC_ADD CSV to pg\OFAC ADD.Outputs[ODBC Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Parallel DFT\Load OFAC_ADD CSV to pg.Paths[Flat File Source Output]"
+                  endId="Package\Parallel DFT\Load OFAC_ADD CSV to pg\OFAC ADD.Inputs[ODBC Destination Input]"
+                  name="Flat File Source Output"
+                  startId="Package\Parallel DFT\Load OFAC_ADD CSV to pg\CSV OFAC ADD.Outputs[Flat File Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Parallel DFT\Load OFAC_ALT CSV to pg"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{1d934ec2-6791-4edb-9c87-ae9165a0e450}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Load OFAC_ALT CSV to pg"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Parallel DFT\Load OFAC_ALT CSV to pg\CSV OFAC ALT"
+                  componentClassID="Microsoft.FlatFileSource"
+                  contactInfo="Flat File Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+                  description="Flat File Source"
+                  localeId="1033"
+                  name="CSV OFAC ALT"
+                  usesDispositions="true"
+                  version="1">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      description="Specifies whether zero-length columns are treated as null."
+                      name="RetainNulls">true</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of an output column containing the file name. If no name is specified, no output column containing the file name will be generated."
+                      name="FileNameColumnName"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Parallel DFT\Load OFAC_ALT CSV to pg\CSV OFAC ALT.Connections[FlatFileConnection]"
+                      connectionManagerID="{31DFF8AF-D38C-4DFE-92F5-EB32092B2DED}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[CsvOfacAlt]"
+                      name="FlatFileConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Parallel DFT\Load OFAC_ALT CSV to pg\CSV OFAC ALT.Outputs[Flat File Source Output]"
+                      name="Flat File Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Parallel DFT\Load OFAC_ALT CSV to pg\CSV OFAC ALT.Outputs[Flat File Source Output].Columns[ent_num]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Parallel DFT\Load OFAC_ALT CSV to pg\CSV OFAC ALT.Outputs[Flat File Source Output].ExternalColumns[ent_num]"
+                          lineageId="Package\Parallel DFT\Load OFAC_ALT CSV to pg\CSV OFAC ALT.Outputs[Flat File Source Output].Columns[ent_num]"
+                          name="ent_num"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Parallel DFT\Load OFAC_ALT CSV to pg\CSV OFAC ALT.Outputs[Flat File Source Output].Columns[alt_num]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Parallel DFT\Load OFAC_ALT CSV to pg\CSV OFAC ALT.Outputs[Flat File Source Output].ExternalColumns[alt_num]"
+                          lineageId="Package\Parallel DFT\Load OFAC_ALT CSV to pg\CSV OFAC ALT.Outputs[Flat File Source Output].Columns[alt_num]"
+                          name="alt_num"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Parallel DFT\Load OFAC_ALT CSV to pg\CSV OFAC ALT.Outputs[Flat File Source Output].Columns[alt_type]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Parallel DFT\Load OFAC_ALT CSV to pg\CSV OFAC ALT.Outputs[Flat File Source Output].ExternalColumns[alt_type]"
+                          length="10"
+                          lineageId="Package\Parallel DFT\Load OFAC_ALT CSV to pg\CSV OFAC ALT.Outputs[Flat File Source Output].Columns[alt_type]"
+                          name="alt_type"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Parallel DFT\Load OFAC_ALT CSV to pg\CSV OFAC ALT.Outputs[Flat File Source Output].Columns[alt_name]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Parallel DFT\Load OFAC_ALT CSV to pg\CSV OFAC ALT.Outputs[Flat File Source Output].ExternalColumns[alt_name]"
+                          length="255"
+                          lineageId="Package\Parallel DFT\Load OFAC_ALT CSV to pg\CSV OFAC ALT.Outputs[Flat File Source Output].Columns[alt_name]"
+                          name="alt_name"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Parallel DFT\Load OFAC_ALT CSV to pg\CSV OFAC ALT.Outputs[Flat File Source Output].Columns[alt_remarks]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Parallel DFT\Load OFAC_ALT CSV to pg\CSV OFAC ALT.Outputs[Flat File Source Output].ExternalColumns[alt_remarks]"
+                          length="255"
+                          lineageId="Package\Parallel DFT\Load OFAC_ALT CSV to pg\CSV OFAC ALT.Outputs[Flat File Source Output].Columns[alt_remarks]"
+                          name="alt_remarks"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Parallel DFT\Load OFAC_ALT CSV to pg\CSV OFAC ALT.Outputs[Flat File Source Output].ExternalColumns[ent_num]"
+                          dataType="i2"
+                          name="ent_num" />
+                        <externalMetadataColumn
+                          refId="Package\Parallel DFT\Load OFAC_ALT CSV to pg\CSV OFAC ALT.Outputs[Flat File Source Output].ExternalColumns[alt_num]"
+                          dataType="i4"
+                          name="alt_num" />
+                        <externalMetadataColumn
+                          refId="Package\Parallel DFT\Load OFAC_ALT CSV to pg\CSV OFAC ALT.Outputs[Flat File Source Output].ExternalColumns[alt_type]"
+                          codePage="1252"
+                          dataType="str"
+                          length="10"
+                          name="alt_type" />
+                        <externalMetadataColumn
+                          refId="Package\Parallel DFT\Load OFAC_ALT CSV to pg\CSV OFAC ALT.Outputs[Flat File Source Output].ExternalColumns[alt_name]"
+                          codePage="1252"
+                          dataType="str"
+                          length="255"
+                          name="alt_name" />
+                        <externalMetadataColumn
+                          refId="Package\Parallel DFT\Load OFAC_ALT CSV to pg\CSV OFAC ALT.Outputs[Flat File Source Output].ExternalColumns[alt_remarks]"
+                          codePage="1252"
+                          dataType="str"
+                          length="255"
+                          name="alt_remarks" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Parallel DFT\Load OFAC_ALT CSV to pg\CSV OFAC ALT.Outputs[Flat File Source Error Output]"
+                      isErrorOut="true"
+                      name="Flat File Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Parallel DFT\Load OFAC_ALT CSV to pg\CSV OFAC ALT.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                          codePage="1252"
+                          dataType="text"
+                          description="Flat File Source Error Output Column"
+                          lineageId="Package\Parallel DFT\Load OFAC_ALT CSV to pg\CSV OFAC ALT.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                          name="Flat File Source Error Output Column" />
+                        <outputColumn
+                          refId="Package\Parallel DFT\Load OFAC_ALT CSV to pg\CSV OFAC ALT.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Parallel DFT\Load OFAC_ALT CSV to pg\CSV OFAC ALT.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Parallel DFT\Load OFAC_ALT CSV to pg\CSV OFAC ALT.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Parallel DFT\Load OFAC_ALT CSV to pg\CSV OFAC ALT.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Parallel DFT\Load OFAC_ALT CSV to pg\OFAC ALT"
+                  componentClassID="Microsoft.SSISODBCDst"
+                  contactInfo="ODBC Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+                  description="ODBC Destination"
+                  name="OFAC ALT"
+                  usesDispositions="true"
+                  version="1">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="The name of the table to be fetched."
+                      expressionType="Notify"
+                      name="TableName">"public"."stg_ofac_alt"</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specify the number of rows fetched per batch."
+                      expressionType="Notify"
+                      name="BatchSize">1000</property>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of rows inserted under the same transaction."
+                      expressionType="Notify"
+                      name="TransactionSize">1000</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Determines the chunk size allocation for LOB columns"
+                      expressionType="Notify"
+                      name="LobChunkSize">32768</property>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds to wait for an SQL statement to execute before returning to the application."
+                      expressionType="Notify"
+                      name="StatementTimeout">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="The code page to use when code page information is unavailable from the data source."
+                      expressionType="Notify"
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Int32"
+                      description="The method used for inserting data. Possible values are 'Batch' or 'Row by row'."
+                      expressionType="Notify"
+                      name="InsertMethod">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="The ODBC C data type for binding numeric data."
+                      expressionType="Notify"
+                      name="BindNumericAs">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Determines how the component would bind columns of (multi)-byte string types (i.e., SQL_CHAR, SQL_VARCHAR, SQL_LONGVARCHAR). The options are: Unicode (SQL_C_WCHAR) and ANSI (SQL_C_CHAR)."
+                      expressionType="Notify"
+                      name="BindCharColumnsAs">0</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Parallel DFT\Load OFAC_ALT CSV to pg\OFAC ALT.Connections[ODBCConnection]"
+                      connectionManagerID="{EC8BA102-8BEE-4888-8ABF-569C8BCB8A85}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[PgServer]"
+                      description="The ODBC runtime connection used to access the database."
+                      name="ODBCConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Parallel DFT\Load OFAC_ALT CSV to pg\OFAC ALT.Inputs[ODBC Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="ODBC Destination Input"
+                      truncationRowDisposition="FailComponent">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Parallel DFT\Load OFAC_ALT CSV to pg\OFAC ALT.Inputs[ODBC Destination Input].Columns[ent_num]"
+                          cachedDataType="i4"
+                          cachedName="ent_num"
+                          externalMetadataColumnId="Package\Parallel DFT\Load OFAC_ALT CSV to pg\OFAC ALT.Inputs[ODBC Destination Input].ExternalColumns[ent_num]"
+                          lineageId="Package\Parallel DFT\Load OFAC_ALT CSV to pg\CSV OFAC ALT.Outputs[Flat File Source Output].Columns[ent_num]" />
+                        <inputColumn
+                          refId="Package\Parallel DFT\Load OFAC_ALT CSV to pg\OFAC ALT.Inputs[ODBC Destination Input].Columns[alt_num]"
+                          cachedDataType="i4"
+                          cachedName="alt_num"
+                          externalMetadataColumnId="Package\Parallel DFT\Load OFAC_ALT CSV to pg\OFAC ALT.Inputs[ODBC Destination Input].ExternalColumns[alt_num]"
+                          lineageId="Package\Parallel DFT\Load OFAC_ALT CSV to pg\CSV OFAC ALT.Outputs[Flat File Source Output].Columns[alt_num]" />
+                        <inputColumn
+                          refId="Package\Parallel DFT\Load OFAC_ALT CSV to pg\OFAC ALT.Inputs[ODBC Destination Input].Columns[alt_type]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="10"
+                          cachedName="alt_type"
+                          externalMetadataColumnId="Package\Parallel DFT\Load OFAC_ALT CSV to pg\OFAC ALT.Inputs[ODBC Destination Input].ExternalColumns[alt_type]"
+                          lineageId="Package\Parallel DFT\Load OFAC_ALT CSV to pg\CSV OFAC ALT.Outputs[Flat File Source Output].Columns[alt_type]" />
+                        <inputColumn
+                          refId="Package\Parallel DFT\Load OFAC_ALT CSV to pg\OFAC ALT.Inputs[ODBC Destination Input].Columns[alt_name]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="255"
+                          cachedName="alt_name"
+                          externalMetadataColumnId="Package\Parallel DFT\Load OFAC_ALT CSV to pg\OFAC ALT.Inputs[ODBC Destination Input].ExternalColumns[alt_name]"
+                          lineageId="Package\Parallel DFT\Load OFAC_ALT CSV to pg\CSV OFAC ALT.Outputs[Flat File Source Output].Columns[alt_name]" />
+                        <inputColumn
+                          refId="Package\Parallel DFT\Load OFAC_ALT CSV to pg\OFAC ALT.Inputs[ODBC Destination Input].Columns[alt_remarks]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="255"
+                          cachedName="alt_remarks"
+                          externalMetadataColumnId="Package\Parallel DFT\Load OFAC_ALT CSV to pg\OFAC ALT.Inputs[ODBC Destination Input].ExternalColumns[alt_remarks]"
+                          lineageId="Package\Parallel DFT\Load OFAC_ALT CSV to pg\CSV OFAC ALT.Outputs[Flat File Source Output].Columns[alt_remarks]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Parallel DFT\Load OFAC_ALT CSV to pg\OFAC ALT.Inputs[ODBC Destination Input].ExternalColumns[ent_num]"
+                          dataType="i4"
+                          name="ent_num" />
+                        <externalMetadataColumn
+                          refId="Package\Parallel DFT\Load OFAC_ALT CSV to pg\OFAC ALT.Inputs[ODBC Destination Input].ExternalColumns[alt_num]"
+                          dataType="i4"
+                          name="alt_num" />
+                        <externalMetadataColumn
+                          refId="Package\Parallel DFT\Load OFAC_ALT CSV to pg\OFAC ALT.Inputs[ODBC Destination Input].ExternalColumns[alt_type]"
+                          dataType="wstr"
+                          length="8"
+                          name="alt_type" />
+                        <externalMetadataColumn
+                          refId="Package\Parallel DFT\Load OFAC_ALT CSV to pg\OFAC ALT.Inputs[ODBC Destination Input].ExternalColumns[alt_name]"
+                          dataType="wstr"
+                          length="350"
+                          name="alt_name" />
+                        <externalMetadataColumn
+                          refId="Package\Parallel DFT\Load OFAC_ALT CSV to pg\OFAC ALT.Inputs[ODBC Destination Input].ExternalColumns[alt_remarks]"
+                          dataType="wstr"
+                          length="200"
+                          name="alt_remarks" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Parallel DFT\Load OFAC_ALT CSV to pg\OFAC ALT.Outputs[ODBC Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="ODBC Destination Error Output"
+                      synchronousInputId="Package\Parallel DFT\Load OFAC_ALT CSV to pg\OFAC ALT.Inputs[ODBC Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Parallel DFT\Load OFAC_ALT CSV to pg\OFAC ALT.Outputs[ODBC Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Parallel DFT\Load OFAC_ALT CSV to pg\OFAC ALT.Outputs[ODBC Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Parallel DFT\Load OFAC_ALT CSV to pg\OFAC ALT.Outputs[ODBC Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Parallel DFT\Load OFAC_ALT CSV to pg\OFAC ALT.Outputs[ODBC Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Parallel DFT\Load OFAC_ALT CSV to pg.Paths[Flat File Source Output]"
+                  endId="Package\Parallel DFT\Load OFAC_ALT CSV to pg\OFAC ALT.Inputs[ODBC Destination Input]"
+                  name="Flat File Source Output"
+                  startId="Package\Parallel DFT\Load OFAC_ALT CSV to pg\CSV OFAC ALT.Outputs[Flat File Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Parallel DFT\Load OFAC_SDN CSV to pg"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{82DDE0E9-2244-4062-AC11-B76DCBC5D052}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Load OFAC_SDN CSV to pg"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN"
+                  componentClassID="Microsoft.FlatFileSource"
+                  contactInfo="Flat File Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+                  description="Flat File Source"
+                  localeId="1033"
+                  name="CSV OFAC SDN"
+                  usesDispositions="true"
+                  version="1">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      description="Specifies whether zero-length columns are treated as null."
+                      name="RetainNulls">true</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of an output column containing the file name. If no name is specified, no output column containing the file name will be generated."
+                      name="FileNameColumnName"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN.Connections[FlatFileConnection]"
+                      connectionManagerID="{88339F4D-FF32-4E69-8BB5-712FEB6B76C2}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[CsvOfacSdn]"
+                      name="FlatFileConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN.Outputs[Flat File Source Output]"
+                      name="Flat File Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN.Outputs[Flat File Source Output].Columns[ent_num]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN.Outputs[Flat File Source Output].ExternalColumns[ent_num]"
+                          lineageId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN.Outputs[Flat File Source Output].Columns[ent_num]"
+                          name="ent_num"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN.Outputs[Flat File Source Output].Columns[sdn_Name]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN.Outputs[Flat File Source Output].ExternalColumns[sdn_Name]"
+                          length="350"
+                          lineageId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN.Outputs[Flat File Source Output].Columns[sdn_Name]"
+                          name="sdn_Name"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN.Outputs[Flat File Source Output].Columns[sdn_Type]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN.Outputs[Flat File Source Output].ExternalColumns[sdn_Type]"
+                          length="12"
+                          lineageId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN.Outputs[Flat File Source Output].Columns[sdn_Type]"
+                          name="sdn_Type"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN.Outputs[Flat File Source Output].Columns[program]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN.Outputs[Flat File Source Output].ExternalColumns[program]"
+                          length="200"
+                          lineageId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN.Outputs[Flat File Source Output].Columns[program]"
+                          name="program"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN.Outputs[Flat File Source Output].Columns[title]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN.Outputs[Flat File Source Output].ExternalColumns[title]"
+                          length="200"
+                          lineageId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN.Outputs[Flat File Source Output].Columns[title]"
+                          name="title"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN.Outputs[Flat File Source Output].Columns[call_sign]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN.Outputs[Flat File Source Output].ExternalColumns[call_sign]"
+                          length="8"
+                          lineageId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN.Outputs[Flat File Source Output].Columns[call_sign]"
+                          name="call_sign"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN.Outputs[Flat File Source Output].Columns[vess_type]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN.Outputs[Flat File Source Output].ExternalColumns[vess_type]"
+                          length="25"
+                          lineageId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN.Outputs[Flat File Source Output].Columns[vess_type]"
+                          name="vess_type"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN.Outputs[Flat File Source Output].Columns[tonnage]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN.Outputs[Flat File Source Output].ExternalColumns[tonnage]"
+                          length="14"
+                          lineageId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN.Outputs[Flat File Source Output].Columns[tonnage]"
+                          name="tonnage"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN.Outputs[Flat File Source Output].Columns[grt]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN.Outputs[Flat File Source Output].ExternalColumns[grt]"
+                          length="8"
+                          lineageId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN.Outputs[Flat File Source Output].Columns[grt]"
+                          name="grt"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN.Outputs[Flat File Source Output].Columns[vess_flag]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN.Outputs[Flat File Source Output].ExternalColumns[vess_flag]"
+                          length="40"
+                          lineageId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN.Outputs[Flat File Source Output].Columns[vess_flag]"
+                          name="vess_flag"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN.Outputs[Flat File Source Output].Columns[vess_owner]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN.Outputs[Flat File Source Output].ExternalColumns[vess_owner]"
+                          length="150"
+                          lineageId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN.Outputs[Flat File Source Output].Columns[vess_owner]"
+                          name="vess_owner"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN.Outputs[Flat File Source Output].Columns[remarks]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN.Outputs[Flat File Source Output].ExternalColumns[remarks]"
+                          length="1000"
+                          lineageId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN.Outputs[Flat File Source Output].Columns[remarks]"
+                          name="remarks"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN.Outputs[Flat File Source Output].ExternalColumns[ent_num]"
+                          dataType="i4"
+                          name="ent_num" />
+                        <externalMetadataColumn
+                          refId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN.Outputs[Flat File Source Output].ExternalColumns[sdn_Name]"
+                          codePage="1252"
+                          dataType="str"
+                          length="350"
+                          name="sdn_Name" />
+                        <externalMetadataColumn
+                          refId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN.Outputs[Flat File Source Output].ExternalColumns[sdn_Type]"
+                          codePage="1252"
+                          dataType="str"
+                          length="12"
+                          name="sdn_Type" />
+                        <externalMetadataColumn
+                          refId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN.Outputs[Flat File Source Output].ExternalColumns[program]"
+                          codePage="1252"
+                          dataType="str"
+                          length="200"
+                          name="program" />
+                        <externalMetadataColumn
+                          refId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN.Outputs[Flat File Source Output].ExternalColumns[title]"
+                          codePage="1252"
+                          dataType="str"
+                          length="200"
+                          name="title" />
+                        <externalMetadataColumn
+                          refId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN.Outputs[Flat File Source Output].ExternalColumns[call_sign]"
+                          codePage="1252"
+                          dataType="str"
+                          length="8"
+                          name="call_sign" />
+                        <externalMetadataColumn
+                          refId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN.Outputs[Flat File Source Output].ExternalColumns[vess_type]"
+                          codePage="1252"
+                          dataType="str"
+                          length="25"
+                          name="vess_type" />
+                        <externalMetadataColumn
+                          refId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN.Outputs[Flat File Source Output].ExternalColumns[tonnage]"
+                          codePage="1252"
+                          dataType="str"
+                          length="14"
+                          name="tonnage" />
+                        <externalMetadataColumn
+                          refId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN.Outputs[Flat File Source Output].ExternalColumns[grt]"
+                          codePage="1252"
+                          dataType="str"
+                          length="8"
+                          name="grt" />
+                        <externalMetadataColumn
+                          refId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN.Outputs[Flat File Source Output].ExternalColumns[vess_flag]"
+                          codePage="1252"
+                          dataType="str"
+                          length="40"
+                          name="vess_flag" />
+                        <externalMetadataColumn
+                          refId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN.Outputs[Flat File Source Output].ExternalColumns[vess_owner]"
+                          codePage="1252"
+                          dataType="str"
+                          length="150"
+                          name="vess_owner" />
+                        <externalMetadataColumn
+                          refId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN.Outputs[Flat File Source Output].ExternalColumns[remarks]"
+                          codePage="1252"
+                          dataType="str"
+                          length="1000"
+                          name="remarks" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN.Outputs[Flat File Source Error Output]"
+                      isErrorOut="true"
+                      name="Flat File Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                          codePage="1252"
+                          dataType="text"
+                          description="Flat File Source Error Output Column"
+                          lineageId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                          name="Flat File Source Error Output Column" />
+                        <outputColumn
+                          refId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\OFAC SDN"
+                  componentClassID="Microsoft.SSISODBCDst"
+                  contactInfo="ODBC Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+                  description="ODBC Destination"
+                  name="OFAC SDN"
+                  usesDispositions="true"
+                  version="1">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="The name of the table to be fetched."
+                      expressionType="Notify"
+                      name="TableName">"public"."stg_ofac_sdn"</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specify the number of rows fetched per batch."
+                      expressionType="Notify"
+                      name="BatchSize">1000</property>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of rows inserted under the same transaction."
+                      expressionType="Notify"
+                      name="TransactionSize">1000</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Determines the chunk size allocation for LOB columns"
+                      expressionType="Notify"
+                      name="LobChunkSize">32768</property>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds to wait for an SQL statement to execute before returning to the application."
+                      expressionType="Notify"
+                      name="StatementTimeout">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="The code page to use when code page information is unavailable from the data source."
+                      expressionType="Notify"
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Int32"
+                      description="The method used for inserting data. Possible values are 'Batch' or 'Row by row'."
+                      expressionType="Notify"
+                      name="InsertMethod">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="The ODBC C data type for binding numeric data."
+                      expressionType="Notify"
+                      name="BindNumericAs">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Determines how the component would bind columns of (multi)-byte string types (i.e., SQL_CHAR, SQL_VARCHAR, SQL_LONGVARCHAR). The options are: Unicode (SQL_C_WCHAR) and ANSI (SQL_C_CHAR)."
+                      expressionType="Notify"
+                      name="BindCharColumnsAs">0</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\OFAC SDN.Connections[ODBCConnection]"
+                      connectionManagerID="{EC8BA102-8BEE-4888-8ABF-569C8BCB8A85}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[PgServer]"
+                      description="The ODBC runtime connection used to access the database."
+                      name="ODBCConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\OFAC SDN.Inputs[ODBC Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="ODBC Destination Input"
+                      truncationRowDisposition="FailComponent">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\OFAC SDN.Inputs[ODBC Destination Input].Columns[ent_num]"
+                          cachedDataType="i4"
+                          cachedName="ent_num"
+                          externalMetadataColumnId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\OFAC SDN.Inputs[ODBC Destination Input].ExternalColumns[ent_num]"
+                          lineageId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN.Outputs[Flat File Source Output].Columns[ent_num]" />
+                        <inputColumn
+                          refId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\OFAC SDN.Inputs[ODBC Destination Input].Columns[sdn_Name]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="350"
+                          cachedName="sdn_Name"
+                          externalMetadataColumnId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\OFAC SDN.Inputs[ODBC Destination Input].ExternalColumns[sdn_name]"
+                          lineageId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN.Outputs[Flat File Source Output].Columns[sdn_Name]" />
+                        <inputColumn
+                          refId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\OFAC SDN.Inputs[ODBC Destination Input].Columns[sdn_Type]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="12"
+                          cachedName="sdn_Type"
+                          externalMetadataColumnId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\OFAC SDN.Inputs[ODBC Destination Input].ExternalColumns[sdn_type]"
+                          lineageId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN.Outputs[Flat File Source Output].Columns[sdn_Type]" />
+                        <inputColumn
+                          refId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\OFAC SDN.Inputs[ODBC Destination Input].Columns[program]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="200"
+                          cachedName="program"
+                          externalMetadataColumnId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\OFAC SDN.Inputs[ODBC Destination Input].ExternalColumns[program]"
+                          lineageId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN.Outputs[Flat File Source Output].Columns[program]" />
+                        <inputColumn
+                          refId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\OFAC SDN.Inputs[ODBC Destination Input].Columns[title]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="200"
+                          cachedName="title"
+                          externalMetadataColumnId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\OFAC SDN.Inputs[ODBC Destination Input].ExternalColumns[title]"
+                          lineageId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN.Outputs[Flat File Source Output].Columns[title]" />
+                        <inputColumn
+                          refId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\OFAC SDN.Inputs[ODBC Destination Input].Columns[call_sign]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="8"
+                          cachedName="call_sign"
+                          externalMetadataColumnId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\OFAC SDN.Inputs[ODBC Destination Input].ExternalColumns[call_sign]"
+                          lineageId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN.Outputs[Flat File Source Output].Columns[call_sign]" />
+                        <inputColumn
+                          refId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\OFAC SDN.Inputs[ODBC Destination Input].Columns[vess_type]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="25"
+                          cachedName="vess_type"
+                          externalMetadataColumnId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\OFAC SDN.Inputs[ODBC Destination Input].ExternalColumns[vess_type]"
+                          lineageId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN.Outputs[Flat File Source Output].Columns[vess_type]" />
+                        <inputColumn
+                          refId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\OFAC SDN.Inputs[ODBC Destination Input].Columns[tonnage]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="14"
+                          cachedName="tonnage"
+                          externalMetadataColumnId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\OFAC SDN.Inputs[ODBC Destination Input].ExternalColumns[tonnage]"
+                          lineageId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN.Outputs[Flat File Source Output].Columns[tonnage]" />
+                        <inputColumn
+                          refId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\OFAC SDN.Inputs[ODBC Destination Input].Columns[grt]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="8"
+                          cachedName="grt"
+                          externalMetadataColumnId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\OFAC SDN.Inputs[ODBC Destination Input].ExternalColumns[grt]"
+                          lineageId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN.Outputs[Flat File Source Output].Columns[grt]" />
+                        <inputColumn
+                          refId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\OFAC SDN.Inputs[ODBC Destination Input].Columns[vess_flag]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="40"
+                          cachedName="vess_flag"
+                          externalMetadataColumnId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\OFAC SDN.Inputs[ODBC Destination Input].ExternalColumns[vess_flag]"
+                          lineageId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN.Outputs[Flat File Source Output].Columns[vess_flag]" />
+                        <inputColumn
+                          refId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\OFAC SDN.Inputs[ODBC Destination Input].Columns[vess_owner]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="150"
+                          cachedName="vess_owner"
+                          externalMetadataColumnId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\OFAC SDN.Inputs[ODBC Destination Input].ExternalColumns[vess_owner]"
+                          lineageId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN.Outputs[Flat File Source Output].Columns[vess_owner]" />
+                        <inputColumn
+                          refId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\OFAC SDN.Inputs[ODBC Destination Input].Columns[remarks]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="1000"
+                          cachedName="remarks"
+                          externalMetadataColumnId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\OFAC SDN.Inputs[ODBC Destination Input].ExternalColumns[remarks]"
+                          lineageId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN.Outputs[Flat File Source Output].Columns[remarks]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\OFAC SDN.Inputs[ODBC Destination Input].ExternalColumns[ent_num]"
+                          dataType="i4"
+                          name="ent_num" />
+                        <externalMetadataColumn
+                          refId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\OFAC SDN.Inputs[ODBC Destination Input].ExternalColumns[sdn_name]"
+                          dataType="wstr"
+                          length="350"
+                          name="sdn_name" />
+                        <externalMetadataColumn
+                          refId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\OFAC SDN.Inputs[ODBC Destination Input].ExternalColumns[sdn_type]"
+                          dataType="wstr"
+                          length="12"
+                          name="sdn_type" />
+                        <externalMetadataColumn
+                          refId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\OFAC SDN.Inputs[ODBC Destination Input].ExternalColumns[program]"
+                          dataType="wstr"
+                          length="200"
+                          name="program" />
+                        <externalMetadataColumn
+                          refId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\OFAC SDN.Inputs[ODBC Destination Input].ExternalColumns[title]"
+                          dataType="wstr"
+                          length="200"
+                          name="title" />
+                        <externalMetadataColumn
+                          refId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\OFAC SDN.Inputs[ODBC Destination Input].ExternalColumns[call_sign]"
+                          dataType="wstr"
+                          length="8"
+                          name="call_sign" />
+                        <externalMetadataColumn
+                          refId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\OFAC SDN.Inputs[ODBC Destination Input].ExternalColumns[vess_type]"
+                          dataType="wstr"
+                          length="25"
+                          name="vess_type" />
+                        <externalMetadataColumn
+                          refId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\OFAC SDN.Inputs[ODBC Destination Input].ExternalColumns[tonnage]"
+                          dataType="wstr"
+                          length="14"
+                          name="tonnage" />
+                        <externalMetadataColumn
+                          refId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\OFAC SDN.Inputs[ODBC Destination Input].ExternalColumns[grt]"
+                          dataType="wstr"
+                          length="8"
+                          name="grt" />
+                        <externalMetadataColumn
+                          refId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\OFAC SDN.Inputs[ODBC Destination Input].ExternalColumns[vess_flag]"
+                          dataType="wstr"
+                          length="40"
+                          name="vess_flag" />
+                        <externalMetadataColumn
+                          refId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\OFAC SDN.Inputs[ODBC Destination Input].ExternalColumns[vess_owner]"
+                          dataType="wstr"
+                          length="150"
+                          name="vess_owner" />
+                        <externalMetadataColumn
+                          refId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\OFAC SDN.Inputs[ODBC Destination Input].ExternalColumns[remarks]"
+                          dataType="wstr"
+                          length="1000"
+                          name="remarks" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\OFAC SDN.Outputs[ODBC Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="ODBC Destination Error Output"
+                      synchronousInputId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\OFAC SDN.Inputs[ODBC Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\OFAC SDN.Outputs[ODBC Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\OFAC SDN.Outputs[ODBC Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\OFAC SDN.Outputs[ODBC Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\OFAC SDN.Outputs[ODBC Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Parallel DFT\Load OFAC_SDN CSV to pg.Paths[Flat File Source Output]"
+                  endId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\OFAC SDN.Inputs[ODBC Destination Input]"
+                  name="Flat File Source Output"
+                  startId="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN.Outputs[Flat File Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate OFAC tables"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{D3A3AB7E-DCB2-439D-A3D5-AC9598DBE909}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate OFAC tables"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{EC8BA102-8BEE-4888-8ABF-569C8BCB8A85}"
+          SQLTask:SqlStatementSource="truncate table stg_ofac_sdn;&#xA;truncate table stg_ofac_add;&#xA;truncate table stg_ofac_alt;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Upload zipped files to FTP"
+      DTS:CreationName="Microsoft.FtpTask"
+      DTS:Description="FTP Task"
+      DTS:DTSID="{7f488d7d-c3cc-49c7-899e-af1cdf2b7f54}"
+      DTS:ExecutableType="Microsoft.FtpTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Upload zipped files to FTP"
+      DTS:TaskContact="FTP Task; Microsoft Corporation; SQL Server 2022; (c) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <FtpData
+          ConnectionName="{38C6D7A9-1C08-475F-8599-4E297656835E}"
+          TaskIsLocalPathVar="True"
+          TaskLocalPath="User::ZippedFilePath"
+          TaskIsRemotePathVar="True"
+          TaskRemotePath="User::RemoteLoadedPath"
+          TaskOverwriteDest="True" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{1F93F1C1-DB05-4D66-8D4B-4ABFFE052260}"
+      DTS:From="Package\Download files from FTP"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Truncate OFAC tables" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{FD5380DE-0D1D-4C0B-9B30-34CC82075A5E}"
+      DTS:From="Package\Truncate OFAC tables"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Parallel DFT" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{497AE9BD-27FE-4D04-8B96-FA5DDBF1D24E}"
+      DTS:From="Package\Parallel DFT"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Compress CSV files" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{4F7D1330-E600-4112-B6FF-113A3087CBEA}"
+      DTS:From="Package\Compress CSV files"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Upload zipped files to FTP" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{B3CFB1F8-911E-4EFF-82F2-9B132597A50F}"
+      DTS:From="Package\Upload zipped files to FTP"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\Delete temp files" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="194.666666666667,42.6666666666667"
+          Id="Package\Download files from FTP"
+          TopLeft="284.833333333333,5.50000000000004" />
+        <NodeLayout
+          Size="208,42.6666666666667"
+          Id="Package\Parallel DFT\Load OFAC_ADD CSV to pg"
+          TopLeft="5.5,5.50000000000004" />
+        <NodeLayout
+          Size="205.333333333334,42.6666666666667"
+          Id="Package\Parallel DFT\Load OFAC_ALT CSV to pg"
+          TopLeft="273.833333333333,5.49999999999993" />
+        <NodeLayout
+          Size="208,42.6666666666667"
+          Id="Package\Parallel DFT\Load OFAC_SDN CSV to pg"
+          TopLeft="539.5,5.49999999999993" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="753.333333333334,103.333333333334"
+          Size="753.333333333334,146.666666666667"
+          Id="Package\Parallel DFT"
+          TopLeft="5.50000000000006,210.833333333334" />
+        <NodeLayout
+          Size="185.333333333334,42.6666666666667"
+          Id="Package\Truncate OFAC tables"
+          TopLeft="289.5,108.166666666667" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="382.166666666667,48.1666666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.0000000000001"
+              Start="0,0"
+              End="0,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="382.166666666667,150.833333333333">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.0000000000001"
+              Start="0,0"
+              End="0,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="174.666666666667,42.6666666666667"
+          Id="Package\Compress CSV files"
+          TopLeft="293.124986896292,422.14034653497" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="381.312493448146,357.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,64.6403465349699"
+              Start="0,0"
+              End="0,57.1403465349699">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,57.1403465349699" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="204,42.6666666666667"
+          Id="Package\Upload zipped files to FTP"
+          TopLeft="304.999986365438,527.421048597368" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="380.458320229625,464.807013201637">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="26.5416661358128,62.6140353957315"
+              Start="0,0"
+              End="26.5416661358128,55.1140353957315">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,27.3070176978657" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,27.3070176978657"
+                    Point2="0,31.3070176978657"
+                    Point3="4,31.3070176978657" />
+                  <mssgle:LineSegment
+                    End="22.5416661358128,31.3070176978657" />
+                  <mssgle:CubicBezierSegment
+                    Point1="22.5416661358128,31.3070176978657"
+                    Point2="26.5416661358128,31.3070176978657"
+                    Point3="26.5416661358128,35.3070176978657" />
+                  <mssgle:LineSegment
+                    End="26.5416661358128,55.1140353957315" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="161.333333333334,42.6666666666667"
+          Id="Package\Delete temp files"
+          TopLeft="336.874984940514,624.649122529055" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="406.999986365438,570.087715264035">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="10.5416652417431,54.5614072650202"
+              Start="0,0"
+              End="10.5416652417431,47.0614072650202">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23.2807036325101" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,23.2807036325101"
+                    Point2="0,27.2807036325101"
+                    Point3="4,27.2807036325101" />
+                  <mssgle:LineSegment
+                    End="6.54166524174315,27.2807036325101" />
+                  <mssgle:CubicBezierSegment
+                    Point1="6.54166524174315,27.2807036325101"
+                    Point2="10.5416652417431,27.2807036325101"
+                    Point3="10.5416652417431,31.2807036325101" />
+                  <mssgle:LineSegment
+                    End="10.5416652417431,47.0614072650202" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Parallel DFT\Load OFAC_ADD CSV to pg">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="152,42.6666666666667"
+          Id="Package\Parallel DFT\Load OFAC_ADD CSV to pg\CSV OFAC ADD"
+          TopLeft="188.624991813675,45.7999980783463" />
+        <NodeLayout
+          Size="129.333333333334,42.6666666666667"
+          Id="Package\Parallel DFT\Load OFAC_ADD CSV to pg\OFAC ADD"
+          TopLeft="223.749989997596,154.049992654324" />
+        <EdgeLayout
+          Id="Package\Parallel DFT\Load OFAC_ADD CSV to pg.Paths[Flat File Source Output]"
+          TopLeft="264.624991813675,88.466664745013">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="23.7916648505877,65.583327909311"
+              Start="0,0"
+              End="23.7916648505877,58.083327909311">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28.7916639546555" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,28.7916639546555"
+                    Point2="0,32.7916639546555"
+                    Point3="4,32.7916639546555" />
+                  <mssgle:LineSegment
+                    End="19.7916648505877,32.7916639546555" />
+                  <mssgle:CubicBezierSegment
+                    Point1="19.7916648505877,32.7916639546555"
+                    Point2="23.7916648505877,32.7916639546555"
+                    Point3="23.7916648505877,36.7916639546555" />
+                  <mssgle:LineSegment
+                    End="23.7916648505877,58.083327909311" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Parallel DFT\Load OFAC_ADD CSV to pg\OFAC ADD">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Parallel DFT\Load OFAC_ALT CSV to pg">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="126.666666666667,42.6666666666667"
+          Id="Package\Parallel DFT\Load OFAC_ALT CSV to pg\OFAC ALT"
+          TopLeft="223.749989997596,154.049992654324" />
+        <NodeLayout
+          Size="149.333333333334,42.6666666666667"
+          Id="Package\Parallel DFT\Load OFAC_ALT CSV to pg\CSV OFAC ALT"
+          TopLeft="188.624991813675,45.7999980783463" />
+        <EdgeLayout
+          Id="Package\Parallel DFT\Load OFAC_ALT CSV to pg.Paths[Flat File Source Output]"
+          TopLeft="263.291658480342,88.466664745013">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="23.7916648505876,65.583327909311"
+              Start="0,0"
+              End="23.7916648505876,58.083327909311">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28.7916639546555" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,28.7916639546555"
+                    Point2="0,32.7916639546555"
+                    Point3="4,32.7916639546555" />
+                  <mssgle:LineSegment
+                    End="19.7916648505876,32.7916639546555" />
+                  <mssgle:CubicBezierSegment
+                    Point1="19.7916648505876,32.7916639546555"
+                    Point2="23.7916648505876,32.7916639546555"
+                    Point3="23.7916648505876,36.7916639546555" />
+                  <mssgle:LineSegment
+                    End="23.7916648505876,58.083327909311" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <TaskHost
+    design-time-name="Package\Parallel DFT\Load OFAC_SDN CSV to pg">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="129.333333333334,42.6666666666667"
+          Id="Package\Parallel DFT\Load OFAC_SDN CSV to pg\OFAC SDN"
+          TopLeft="223.749989997596,154.049992654324" />
+        <NodeLayout
+          Size="150.666666666667,42.6666666666667"
+          Id="Package\Parallel DFT\Load OFAC_SDN CSV to pg\CSV OFAC SDN"
+          TopLeft="188.624991813675,45.7999980783463" />
+        <EdgeLayout
+          Id="Package\Parallel DFT\Load OFAC_SDN CSV to pg.Paths[Flat File Source Output]"
+          TopLeft="263.958325147008,88.466664745013">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="24.4583315172544,65.5833279093108"
+              Start="0,0"
+              End="24.4583315172544,58.0833279093108">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28.7916639546554" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,28.7916639546554"
+                    Point2="0,32.7916639546554"
+                    Point3="4,32.7916639546554" />
+                  <mssgle:LineSegment
+                    End="20.4583315172544,32.7916639546554" />
+                  <mssgle:CubicBezierSegment
+                    Point1="20.4583315172544,32.7916639546554"
+                    Point2="24.4583315172544,32.7916639546554"
+                    Point3="24.4583315172544,36.7916639546554" />
+                  <mssgle:LineSegment
+                    End="24.4583315172544,58.0833279093108" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Parallel DFT\Load OFAC_SDN CSV to pg\OFAC SDN">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
