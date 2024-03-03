@@ -1,0 +1,127 @@
+﻿<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="CsvOfacSdn"
+  DTS:DTSID="{88339F4D-FF32-4E69-8BB5-712FEB6B76C2}"
+  DTS:CreationName="FLATFILE">
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:Format="Delimited"
+      DTS:LocaleID="1033"
+      DTS:HeaderRowDelimiter="_x000D__x000A_"
+      DTS:ColumnNamesInFirstDataRow="True"
+      DTS:RowDelimiter=""
+      DTS:TextQualifier="_x0022_"
+      DTS:CodePage="1252"
+      DTS:ConnectionString="C:\Users\Josh\OneDrive\Community Stuff\Josh Dev\Live Sessions\08_Build your data portfolio\Finished Project Repository\projects\4. Loading CSV files from FTP to PostgreSQL using SSIS\Extracts\OFAC_SDN.csv">
+      <DTS:FlatFileColumns>
+        <DTS:FlatFileColumn
+          DTS:ColumnType="Delimited"
+          DTS:ColumnDelimiter="_x002C_"
+          DTS:DataType="3"
+          DTS:TextQualified="True"
+          DTS:ObjectName="ent_num"
+          DTS:DTSID="{ACB441C5-A67A-49EA-AAA5-F9AEAF7D5770}"
+          DTS:CreationName="" />
+        <DTS:FlatFileColumn
+          DTS:ColumnType="Delimited"
+          DTS:ColumnDelimiter="_x002C_"
+          DTS:MaximumWidth="350"
+          DTS:DataType="129"
+          DTS:TextQualified="True"
+          DTS:ObjectName="sdn_Name"
+          DTS:DTSID="{A9F67124-BF2A-48CD-817C-0D2BB85F59FF}"
+          DTS:CreationName="" />
+        <DTS:FlatFileColumn
+          DTS:ColumnType="Delimited"
+          DTS:ColumnDelimiter="_x002C_"
+          DTS:MaximumWidth="12"
+          DTS:DataType="129"
+          DTS:TextQualified="True"
+          DTS:ObjectName="sdn_Type"
+          DTS:DTSID="{63B18E4E-5ACD-455F-9C43-534720947652}"
+          DTS:CreationName="" />
+        <DTS:FlatFileColumn
+          DTS:ColumnType="Delimited"
+          DTS:ColumnDelimiter="_x002C_"
+          DTS:MaximumWidth="200"
+          DTS:DataType="129"
+          DTS:TextQualified="True"
+          DTS:ObjectName="program"
+          DTS:DTSID="{DA11F965-99F6-41A2-BBEF-D82197F4CED2}"
+          DTS:CreationName="" />
+        <DTS:FlatFileColumn
+          DTS:ColumnType="Delimited"
+          DTS:ColumnDelimiter="_x002C_"
+          DTS:MaximumWidth="200"
+          DTS:DataType="129"
+          DTS:TextQualified="True"
+          DTS:ObjectName="title"
+          DTS:DTSID="{2AEF37A7-8068-4EA8-ABF4-8D6DB85800F9}"
+          DTS:CreationName="" />
+        <DTS:FlatFileColumn
+          DTS:ColumnType="Delimited"
+          DTS:ColumnDelimiter="_x002C_"
+          DTS:MaximumWidth="8"
+          DTS:DataType="129"
+          DTS:TextQualified="True"
+          DTS:ObjectName="call_sign"
+          DTS:DTSID="{72F63D5B-68D6-4C0C-8CA6-0CDE066228D0}"
+          DTS:CreationName="" />
+        <DTS:FlatFileColumn
+          DTS:ColumnType="Delimited"
+          DTS:ColumnDelimiter="_x002C_"
+          DTS:MaximumWidth="25"
+          DTS:DataType="129"
+          DTS:TextQualified="True"
+          DTS:ObjectName="vess_type"
+          DTS:DTSID="{B8B1CB1F-2CAB-49FA-9E0C-0F805ADC62C8}"
+          DTS:CreationName="" />
+        <DTS:FlatFileColumn
+          DTS:ColumnType="Delimited"
+          DTS:ColumnDelimiter="_x002C_"
+          DTS:MaximumWidth="14"
+          DTS:DataType="129"
+          DTS:TextQualified="True"
+          DTS:ObjectName="tonnage"
+          DTS:DTSID="{1F284BA0-1821-4FC0-BB59-655889C3F72F}"
+          DTS:CreationName="" />
+        <DTS:FlatFileColumn
+          DTS:ColumnType="Delimited"
+          DTS:ColumnDelimiter="_x002C_"
+          DTS:MaximumWidth="8"
+          DTS:DataType="129"
+          DTS:TextQualified="True"
+          DTS:ObjectName="grt"
+          DTS:DTSID="{C282EE90-2E63-4375-B206-94097C8AEB26}"
+          DTS:CreationName="" />
+        <DTS:FlatFileColumn
+          DTS:ColumnType="Delimited"
+          DTS:ColumnDelimiter="_x002C_"
+          DTS:MaximumWidth="40"
+          DTS:DataType="129"
+          DTS:TextQualified="True"
+          DTS:ObjectName="vess_flag"
+          DTS:DTSID="{8C9B43A9-D67A-4B3F-9962-56DB9E10EF5D}"
+          DTS:CreationName="" />
+        <DTS:FlatFileColumn
+          DTS:ColumnType="Delimited"
+          DTS:ColumnDelimiter="_x002C_"
+          DTS:MaximumWidth="150"
+          DTS:DataType="129"
+          DTS:TextQualified="True"
+          DTS:ObjectName="vess_owner"
+          DTS:DTSID="{A87AB6F6-E7DB-4A80-AD51-D457F2177D8F}"
+          DTS:CreationName="" />
+        <DTS:FlatFileColumn
+          DTS:ColumnType="Delimited"
+          DTS:ColumnDelimiter="_x000D__x000A_"
+          DTS:MaximumWidth="1000"
+          DTS:DataType="129"
+          DTS:TextQualified="True"
+          DTS:ObjectName="remarks"
+          DTS:DTSID="{2D51823C-31B9-4518-AC32-F0EC68162BE7}"
+          DTS:CreationName="" />
+      </DTS:FlatFileColumns>
+    </DTS:ConnectionManager>
+  </DTS:ObjectData>
+</DTS:ConnectionManager>

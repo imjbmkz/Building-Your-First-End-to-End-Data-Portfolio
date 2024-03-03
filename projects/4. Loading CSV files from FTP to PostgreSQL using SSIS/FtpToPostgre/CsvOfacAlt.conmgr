@@ -1,0 +1,63 @@
+﻿<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="CsvOfacAlt"
+  DTS:DTSID="{31DFF8AF-D38C-4DFE-92F5-EB32092B2DED}"
+  DTS:CreationName="FLATFILE">
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:Format="Delimited"
+      DTS:LocaleID="1033"
+      DTS:HeaderRowDelimiter="_x000D__x000A_"
+      DTS:ColumnNamesInFirstDataRow="True"
+      DTS:RowDelimiter=""
+      DTS:TextQualifier="_x0022_"
+      DTS:CodePage="1252"
+      DTS:ConnectionString="C:\Users\Josh\OneDrive\Community Stuff\Josh Dev\Live Sessions\08_Build your data portfolio\Finished Project Repository\projects\4. Loading CSV files from FTP to PostgreSQL using SSIS\Extracts\OFAC_ALT.csv">
+      <DTS:FlatFileColumns>
+        <DTS:FlatFileColumn
+          DTS:ColumnType="Delimited"
+          DTS:ColumnDelimiter="_x002C_"
+          DTS:DataType="2"
+          DTS:TextQualified="True"
+          DTS:ObjectName="ent_num"
+          DTS:DTSID="{68DD9218-0C4D-4BD1-A1CD-108B7A46792B}"
+          DTS:CreationName="" />
+        <DTS:FlatFileColumn
+          DTS:ColumnType="Delimited"
+          DTS:ColumnDelimiter="_x002C_"
+          DTS:DataType="3"
+          DTS:TextQualified="True"
+          DTS:ObjectName="alt_num"
+          DTS:DTSID="{F1F3DD9A-22FC-4161-9E73-D6A4A6763E79}"
+          DTS:CreationName="" />
+        <DTS:FlatFileColumn
+          DTS:ColumnType="Delimited"
+          DTS:ColumnDelimiter="_x002C_"
+          DTS:MaximumWidth="10"
+          DTS:DataType="129"
+          DTS:TextQualified="True"
+          DTS:ObjectName="alt_type"
+          DTS:DTSID="{D02F7070-5851-47E0-BEE9-225EEC361715}"
+          DTS:CreationName="" />
+        <DTS:FlatFileColumn
+          DTS:ColumnType="Delimited"
+          DTS:ColumnDelimiter="_x002C_"
+          DTS:MaximumWidth="255"
+          DTS:DataType="129"
+          DTS:TextQualified="True"
+          DTS:ObjectName="alt_name"
+          DTS:DTSID="{D2512A93-BB30-46C0-A0F7-8EEFD6F72D06}"
+          DTS:CreationName="" />
+        <DTS:FlatFileColumn
+          DTS:ColumnType="Delimited"
+          DTS:ColumnDelimiter="_x000D__x000A_"
+          DTS:MaximumWidth="255"
+          DTS:DataType="129"
+          DTS:TextQualified="True"
+          DTS:ObjectName="alt_remarks"
+          DTS:DTSID="{AE6915E8-CC0A-428C-9F60-E73613DF9EEE}"
+          DTS:CreationName="" />
+      </DTS:FlatFileColumns>
+    </DTS:ConnectionManager>
+  </DTS:ObjectData>
+</DTS:ConnectionManager>

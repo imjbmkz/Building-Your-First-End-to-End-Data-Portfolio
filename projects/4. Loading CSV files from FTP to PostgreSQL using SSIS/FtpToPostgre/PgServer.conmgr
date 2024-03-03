@@ -1,0 +1,10 @@
+﻿<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="PgServer"
+  DTS:DTSID="{EC8BA102-8BEE-4888-8ABF-569C8BCB8A85}"
+  DTS:CreationName="ODBC">
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectionString="Dsn=PgServer;" />
+  </DTS:ObjectData>
+</DTS:ConnectionManager>

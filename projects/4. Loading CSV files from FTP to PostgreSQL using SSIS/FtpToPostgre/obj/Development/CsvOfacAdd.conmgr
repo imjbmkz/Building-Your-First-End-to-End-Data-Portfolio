@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="CsvOfacAdd"
+  DTS:DTSID="{A8B04C64-89C5-418D-AA91-89360059D7E2}"
+  DTS:CreationName="FLATFILE">
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:Format="Delimited"
+      DTS:LocaleID="1033"
+      DTS:HeaderRowDelimiter="_x000D__x000A_"
+      DTS:ColumnNamesInFirstDataRow="True"
+      DTS:RowDelimiter=""
+      DTS:TextQualifier="_x0022_"
+      DTS:CodePage="1252"
+      DTS:ConnectionString="C:\Users\Josh\OneDrive\Community Stuff\Josh Dev\Live Sessions\08_Build your data portfolio\Finished Project Repository\projects\4. Loading CSV files from FTP to PostgreSQL using SSIS\Extracts\OFAC_ADD.csv">
+      <DTS:FlatFileColumns>
+        <DTS:FlatFileColumn
+          DTS:ColumnType="Delimited"
+          DTS:ColumnDelimiter="_x002C_"
+          DTS:DataType="2"
+          DTS:TextQualified="True"
+          DTS:ObjectName="ent_num"
+          DTS:DTSID="{952F5F28-42C4-4B85-930E-D54DFB61B3CE}"
+          DTS:CreationName="" />
+        <DTS:FlatFileColumn
+          DTS:ColumnType="Delimited"
+          DTS:ColumnDelimiter="_x002C_"
+          DTS:DataType="3"
+          DTS:TextQualified="True"
+          DTS:ObjectName="add_num"
+          DTS:DTSID="{8F8BF0C5-EEBA-459C-BEC0-6463EAC54A30}"
+          DTS:CreationName="" />
+        <DTS:FlatFileColumn
+          DTS:ColumnType="Delimited"
+          DTS:ColumnDelimiter="_x002C_"
+          DTS:MaximumWidth="255"
+          DTS:DataType="129"
+          DTS:TextQualified="True"
+          DTS:ObjectName="address"
+          DTS:DTSID="{03F6E7E9-84D9-48C8-A0F4-6FE2AE1D9040}"
+          DTS:CreationName="" />
+        <DTS:FlatFileColumn
+          DTS:ColumnType="Delimited"
+          DTS:ColumnDelimiter="_x002C_"
+          DTS:MaximumWidth="100"
+          DTS:DataType="129"
+          DTS:TextQualified="True"
+          DTS:ObjectName="complete_address"
+          DTS:DTSID="{BAB27D11-1193-43DC-B4A1-ED1E396CBE57}"
+          DTS:CreationName="" />
+        <DTS:FlatFileColumn
+          DTS:ColumnType="Delimited"
+          DTS:ColumnDelimiter="_x002C_"
+          DTS:MaximumWidth="50"
+          DTS:DataType="129"
+          DTS:TextQualified="True"
+          DTS:ObjectName="country"
+          DTS:DTSID="{677A8FDE-6E9F-4123-8C6E-E98008DB7A79}"
+          DTS:CreationName="" />
+        <DTS:FlatFileColumn
+          DTS:ColumnType="Delimited"
+          DTS:ColumnDelimiter="_x000D__x000A_"
+          DTS:MaximumWidth="255"
+          DTS:DataType="129"
+          DTS:TextQualified="True"
+          DTS:ObjectName="add_remarks"
+          DTS:DTSID="{733CFB0E-6077-4C54-9397-261CAF03AD0E}"
+          DTS:CreationName="" />
+      </DTS:FlatFileColumns>
+    </DTS:ConnectionManager>
+  </DTS:ObjectData>
+</DTS:ConnectionManager>
