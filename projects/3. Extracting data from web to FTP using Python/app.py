@@ -25,7 +25,7 @@ def upload_to_ftp(ftp: FTP_TLS, file_to_upload: str):
 
     # Upload file
     with open(file_path, "rb") as fp:
-        ftp.storbinary(f"STOR ftp/{file_name}", fp)
+        ftp.storbinary(f"STOR ftp/new/{file_name}", fp)
 
 def read_csv(config: dict) -> pd.DataFrame:
     url = config["URL"]

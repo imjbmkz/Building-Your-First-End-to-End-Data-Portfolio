@@ -1,0 +1,9 @@
+ipykernel
+pandas
+sqlalchemy
+psycopg2
+pyarrow
+rapidfuzz
+fastapi
+uvicorn[standard]
+orjson
